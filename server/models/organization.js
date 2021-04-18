@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 
 const organizationSchema = mongoose.Schema({
-  name: String
+  name: {
+    type: String,
+    required: true
+  }
 });
 
 const organization = mongoose.model('Organization', organizationSchema);
