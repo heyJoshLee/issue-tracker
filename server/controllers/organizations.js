@@ -16,6 +16,7 @@ export const createOrganization = async (req, res) => {
   try {
     await newOrganization.save();
     console.log("SAVED")
+    console.log(newOrganization);
     res.status(201).json(newOrganization);
   } catch (error) {
     res.status(404).json({ message: error.message })
@@ -23,13 +24,22 @@ export const createOrganization = async (req, res) => {
 }
 
 export const getOrganization = async (req, res) => {
-  const id = req.params.id
-  console.log(req.params)
+  const id = req.params.id;
   try {
     const organization = await Organization.findById(id);
     res.status(201).json(organization);
   } catch (error) {
     res.status(404).json({ message: error.message});
   }
+}
 
+export const deleteOrganization = async (req, res) => {
+  const id = req.params.id;
+  console.log("DELETING")
+  try {
+    await Organization.findByIdAndDelete(id)
+    res.status(200).json(id);
+  } catch (error) {
+    res.status(500).json(({ message: error.message }));
+  }
 }
